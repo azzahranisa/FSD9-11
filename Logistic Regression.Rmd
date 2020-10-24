@@ -1,0 +1,54 @@
+---
+title: "Simple Logistic Regression"
+output: html_document
+---
+
+```{r}
+library(AppliedPredictiveModeling)
+```
+
+```{r}
+data("iris")
+```
+```{r}
+head(iris)
+```
+
+```{r}
+dt <- subset(iris, select = c(Sepal.Length, Petal.Length, Petal.Width))
+dt
+```
+```{r}
+iris$Petal.Width <- as.numeric(iris$Petal.Width)
+```
+
+
+```{r}
+fit <- glm(formula = as.factor(Petal.Width)~Petal.Length, data = iris, family = binomial)
+summary(fit)
+```
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+iris$Petal.Length <- as.numeric(iris$Petal.Length)
+```
+
+
+```{r}
+ggplot(dt, aes(x=Petal.Length, y=Petal.Width)) + geom_point() +
+  stat_smooth(method = "glm", family="binomial", se = FALSE)
+```
+
+```{r}
+fit2 <- glm(formula = Petal.Width~Petal.Length+Sepal.Length, data = iris, family = binomial)
+summary(fit2)
+```
+
+```{r}
+library(predict3d)
+ggPredict(fit2)
+```
+

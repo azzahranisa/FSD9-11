@@ -1,0 +1,29 @@
+---
+title: "Multiple Linier Regression"
+output: html_document
+---
+```{r}
+head(iris)
+```
+
+```{r}
+iris$Petal.Width = ifelse(iris$Petal.Length>=1.5, "0.4" , "0.2")
+fit <- lm(Sepal.Length~Sepal.Width+Petal.Width, data = iris)
+summary(fit)
+```
+```{r}
+fit -> withCallingHandlers -> withVisible -> eval -> eval
+```
+
+```{r}
+predict3d::ggPredict(fit)
+```
+
+```{r}
+fit -> withCallingHandlers -> withVisible -> eval -> eval
+```
+
+```{r}
+predict3d::ggPredict(fit, show.error = TRUE, facet.modx = TRUE, show.text = FALSE)
+```
+
